@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="formulaire.css">
+    <title>Formulaire de Connexion a un Server</title>
+</head>
+<body>
+    <h2>Connexion au Serveur</h2>
+    <form id="form_connexion" action="recup_ddonnees.php" method="post">
+        <label for="IP">Adresse IP :</label>
+        <input type="text" name="adresse_ip" id="ip" placeholder="00.00.00.00" required>
+        <label for="password">Mot de Passe :</label>
+        <input type="password" name="mot_de_passe" id="password" required>
+        <button type="submit">Se Connecter</button>
+    </form>
+    <script src="formulaire.js"></script>
+</body>
+</html>
