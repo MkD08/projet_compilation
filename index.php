@@ -8,6 +8,10 @@
 </head>
 <body>
     <h2>Connexion au Serveur</h2>
+
+    <!-- Message de succès, caché par défaut -->
+    <div id="successMessage" style="display: none;">Connexion enregistrée avec succès !</div>
+
     <form id="form_connexion" action="recup_ddonnees.php" method="post">
         <label for="IP">Adresse IP :</label>
         <input type="text" name="adresse_ip" id="ip" placeholder="00.00.00.00" required>
@@ -15,6 +19,7 @@
         <input type="password" name="mot_de_passe" id="password" required>
         <button type="submit">Se Connecter</button>
     </form>
+
     <script src="formulaire.js"></script>
 </body>
 </html>

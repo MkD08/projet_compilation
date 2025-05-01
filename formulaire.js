@@ -50,6 +50,20 @@ ipInput.addEventListener("input", function () {
         return;
     }
 
+    // Vérifie si un des blocs est > 255
+    if (ip.includes(".")) {
+        const blocs = ip.split(".");
+        for (let bloc of blocs) {
+            if (bloc && !isNaN(bloc) && parseInt(bloc) > 255) {
+                ipInput.style.borderColor = "red";
+                ipFeedback.textContent = "Erreur : Un des blocs de l'adresse dépasse 255.";
+                ipFeedback.style.color = "red";
+                shakeInput(ipInput);
+                return;
+            }
+        }
+    }
+
     if (!regexIPv4Partial.test(ip) && !regexIPv6Partial.test(ip)) {
         ipInput.style.borderColor = "red";
         ipFeedback.textContent = "Erreur : Format invalide. L'adresse ne peut pas contenir ce que vous avez saisi.";
@@ -114,5 +128,14 @@ form.addEventListener("submit", function (e) {
             passwordFeedback.style.color = "red";
             shakeInput(passwordInput);
         }
+    }
+});
+
+// Afficher le message de succès si l'URL contient "status=success"
+window.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("status") === "success") {
+        const successDiv = document.getElementById("successMessage");
+        if (successDiv) successDiv.style.display = "block";
     }
 });

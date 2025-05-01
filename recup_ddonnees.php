@@ -2,7 +2,9 @@
 $host = 'localhost';
 $dbname = 'serveur_connexions';
 $username = 'root';
-$password = '';
+$password = '1604ibra';
+
+$message = ''; // Variable pour afficher un message
 
 try {
     // Connexion PDO sécurisée
@@ -19,22 +21,29 @@ $mot_de_passe = isset($_POST['mot_de_passe']) ? trim($_POST['mot_de_passe']) : '
 
 // Vérifier que les champs ne sont pas vides
 if (empty($adresse_ip) || empty($mot_de_passe)) {
-    die('Veuillez remplir tous les champs.');
-}
+    $message = 'Veuillez remplir tous les champs.';
+} else {
+    // Validation de l'adresse IP
+    if (!filter_var($adresse_ip, FILTER_VALIDATE_IP)) {
+        $message = 'Adresse IP invalide.';
+    } else {
+        // Hachage du mot de passe
+        $mot_de_passe_hache = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
-// Hachage du mot de passe
-$mot_de_passe_hache = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+        // Préparer et exécuter la requête d'insertion
+        try {
+            $stmt = $pdo->prepare("INSERT INTO connexions (adresse_ip, mot_de_passe) VALUES (:adresse_ip, :mot_de_passe)");
+            $stmt->execute([
+                ':adresse_ip' => $adresse_ip,
+                ':mot_de_passe' => $mot_de_passe_hache
+            ]);
 
-// Préparer et exécuter la requête d'insertion
-try {
-    $stmt = $pdo->prepare("INSERT INTO connexions (adresse_ip, mot_de_passe) VALUES (:adresse_ip, :mot_de_passe)");
-    $stmt->execute([
-        ':adresse_ip' => $adresse_ip,
-        ':mot_de_passe' => $mot_de_passe_hache
-    ]);
-
-    echo "Connexion enregistrée avec succès !";
-} catch (PDOException $e) {
-    die("Erreur lors de l'enregistrement : " . $e->getMessage());
+            // Rediriger avec le message de succès
+            header("Location: index.php?status=success");
+            exit; // Important pour éviter l'exécution du code suivant
+        } catch (PDOException $e) {
+            $message = "Erreur lors de l'enregistrement : " . $e->getMessage();
+        }
+    }
 }
 ?>

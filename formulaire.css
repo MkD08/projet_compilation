@@ -8,6 +8,24 @@ h2 {
     text-align: center;
 }
 
+#successMessage {
+    display: none;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 12px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 form {
     max-width: 400px;
     margin: auto;
@@ -17,16 +35,14 @@ form {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Style des labels */
 label {
     display: block;
     margin-top: 10px;
 }
 
-/* Style des inputs */
 input {
     width: 100%;
-    padding: 8px 30px 8px 8px; /* Espace pour l'icône */
+    padding: 8px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -38,7 +54,6 @@ input:focus {
     outline: none;
 }
 
-/* Style du bouton */
 button {
     margin-top: 15px;
     width: 100%;
@@ -55,7 +70,6 @@ button:hover {
     background-color: #004d99;
 }
 
-/* Animation pour effet "shake" */
 @keyframes shake {
     0% { transform: translateX(0); }
     20% { transform: translateX(-5px); }
@@ -67,4 +81,21 @@ button:hover {
 
 .shake {
     animation: shake 0.3s;
+}
+#successMessage {
+    display: none;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 12px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
